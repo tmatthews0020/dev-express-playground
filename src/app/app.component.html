@@ -1,7 +1,6 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<app-topic-picker [topics]="topics" (topic)="applyFilter($event)"></app-topic-picker>
-<dx-data-grid
-  [dataSource]="stories">
-</dx-data-grid>
 
-<router-outlet></router-outlet>
+  <nav>
+    <a routerLink="/search-articles" routerLinkActive="active">Search Articles</a>
+    <a routerLink="/top-stories" routerLinkActive="active">Top Stories</a>
+  </nav>
+  <router-outlet></router-outlet>
