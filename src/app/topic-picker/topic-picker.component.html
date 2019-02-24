@@ -1,0 +1,8 @@
+<form [formGroup]="form">
+  <dx-select-box
+    [dataSource]="topics"
+    placeholder="Select a topic"
+    formControlName="topic">
+  </dx-select-box>
+  <button mat-raised-button [disabled]="form.invalid" (click)="applyFilter()">Apply</button>
+</form>
