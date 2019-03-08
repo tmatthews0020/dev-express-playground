@@ -39,7 +39,7 @@ export class NytimesService {
     )
   }
 
-  searchArticles(search: string){
+  searchArticles(search: string, filters: any){
     const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json`
     return this.httpClient.get(url,{
       params: new HttpParams()

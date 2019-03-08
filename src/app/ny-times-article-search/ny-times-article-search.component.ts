@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NytimesService } from '../services/nytimes.service';
+import { ArticleSearchService } from './article-search.service';
 
 @Component({
   selector: 'app-ny-times-article-search',
@@ -9,19 +10,29 @@ import { NytimesService } from '../services/nytimes.service';
 export class NyTimesArticleSearchComponent implements OnInit {
 
   constructor(
-    private nyTimesService: NytimesService
+    private nyTimesService: NytimesService,
+    private articleSearchService: ArticleSearchService
   ) { }
 
 
   search: string;
+  filters: any;
   searchResults: any[];
 
   ngOnInit() {
-  }
 
-  searchInput(search: string){
-    this.search = search
-    this.nyTimesService.currentArticleSearch$.subscribe((res) => this.searchResults = res );
-    this.nyTimesService.searchArticles(search).subscribe(() => { return });
+    this.articleSearchService.searchQuery$.subscribe((search) => {
+      this.search = search
+      this.nyTimesService.searchArticles(this.search, this.filters).subscribe(() => { return });
+    })
+
+    this.articleSearchService.searchFilters$.subscribe((filters) => {
+      this.filters = filters;
+      debugger;
+      this.nyTimesService.searchArticles(this.search, this.filters).subscribe(() => { return });
+    })
+
+    this.nyTimesService.currentArticleSearch$.subscribe((res) => this.searchResults = res);
+
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ArticleSearchService } from '../article-search.service';
 
 @Component({
   selector: 'app-search-panel',
@@ -12,6 +13,7 @@ export class SearchPanelComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private articleSearchService: ArticleSearchService
   ) { }
 
   form: FormGroup;
@@ -23,7 +25,7 @@ export class SearchPanelComponent implements OnInit {
     })
 
     this.form.get('search').valueChanges.subscribe((val) => {
-      this.search.emit(val);
+      this.articleSearchService.updateSearchQuery(val);
     })
   }
 }

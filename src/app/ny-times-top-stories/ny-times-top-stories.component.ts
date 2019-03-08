@@ -15,23 +15,47 @@ export class NyTimesTopStoriesComponent implements OnInit {
   }
 
   stories: any[] = [];
-
+  topics = this.nyTimesService.topics;
   // default science
   topic = 'science';
-  topics = this.nyTimesService.topics;
-
+  columns: any[];
 
   ngOnInit(){
-    this.getStories();
+    this.nyTimesService.currentStories$.subscribe((res) => { this.stories = res });
+
+    this.nyTimesService.getTopStories(this.topic).subscribe(() => { return } );
+    
+    this.columns = this.getColumns();
   }
 
-  getStories(){
-    this.nyTimesService.currentStories$.subscribe((res) => { this.stories = res });
-    this.nyTimesService.getTopStories(this.topic).subscribe(() => { return } );
-  }
 
   applyFilter(topic: string){
     this.topic = topic;
     this.nyTimesService.getTopStories(topic).subscribe(() => { return });
+  }
+
+  getColumns(){
+    return [
+        this.titleColumn(),
+        'abstract',
+        'url'
+    ]
+  }
+
+
+  titleColumn(){
+    return {
+      dataField: 'title'
+    }
+  }
+
+  customLoad(){
+    return new Promise((resolve, reject) => {
+      resolve(JSON.parse(localStorage.getItem('gridData')))
+    });
+  }
+
+  customSave(state){
+      localStorage.setItem('gridData', JSON.stringify(state));
   }
 }

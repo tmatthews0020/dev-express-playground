@@ -1,9 +1,13 @@
 <app-topic-picker [topics]="topics" (topic)="applyFilter($event)"></app-topic-picker>
 <dx-data-grid
-  [dataSource]="stories">
+  [columns]="columns"
+  [dataSource]="stories"
+  [allowColumnResizing]="true"
+  [allowColumnReordering]="true">
     <dxo-editing
       [allowUpdating]="true"
       [allowAdding]="true"
       [allowDeleting]="true">
   </dxo-editing>
+  <dxo-state-storing [enabled]="true" type="custom" [customLoad]="customLoad" [customSave]="customSave"></dxo-state-storing>
 </dx-data-grid>

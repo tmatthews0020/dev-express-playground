@@ -11,6 +11,7 @@ import { NyTimesTopStoriesComponent } from './ny-times-top-stories/ny-times-top-
 import { NyTimesArticleSearchComponent } from './ny-times-article-search/ny-times-article-search.component';
 import { SearchPanelComponent } from './ny-times-article-search/search-panel/search-panel.component';
 import { SearchResultsComponent } from './ny-times-article-search/search-results/search-results.component';
+import { SearchFiltersComponent } from './ny-times-article-search/search-filters/search-filters.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SearchResultsComponent } from './ny-times-article-search/search-results
     NyTimesTopStoriesComponent,
     NyTimesArticleSearchComponent,
     SearchPanelComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    SearchFiltersComponent
   ],
   imports: [
     BrowserModule,
